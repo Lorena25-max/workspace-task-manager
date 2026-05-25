@@ -527,36 +527,118 @@ export default function Dashboard() {
 
                   <div className="space-y-4">
 
-                    {columns[
-                      estado
-                    ].map((task) => (
+  {columns[estado].length === 0 ? (
 
-                      <div
-                        key={task.id}
-                        draggable
-                        onDragStart={(
-                          e
-                        ) =>
-                          handleDragStart(
-                            e,
-                            task
-                          )
-                        }
-                        className={`
-                          rounded-3xl p-5 shadow-lg hover:shadow-2xl 
-                          hover:-translate-y-2 transition-all duration-300 
-                          cursor-grab border backdrop-blur-xl
-                          ${
-                            task.estado ===
-                            "Pendiente"
-                              ? "bg-gradient-to-br from-rose-100 to-pink-50 border-rose-200"
-                              : task.estado ===
-                                "En Progreso"
-                              ? "bg-gradient-to-br from-amber-100 to-yellow-50 border-amber-200"
-                              : "bg-gradient-to-br from-emerald-100 to-green-50 border-emerald-200"
-                          }
-                        `}
-                      >
+    <div className="bg-white/40 border border-dashed border-white/60 rounded-3xl p-10 text-center">
+
+      <div className="text-5xl mb-4">
+        ✨
+      </div>
+
+      <h3 className="text-slate-700 font-bold text-lg mb-2">
+        No hay tareas
+      </h3>
+
+      <p className="text-slate-500 text-sm">
+        Arrastra tareas aquí o crea una nueva.
+      </p>
+
+    </div>
+
+  ) : (
+
+    columns[estado].map((task) => (
+
+      <div
+        key={task.id}
+        draggable
+        onDragStart={(e) =>
+          handleDragStart(e, task)
+        }
+        className={`
+          rounded-3xl p-5 shadow-lg hover:shadow-2xl 
+          hover:-translate-y-2 transition-all duration-300 
+          cursor-grab border backdrop-blur-xl
+          ${
+            task.estado ===
+            "Pendiente"
+              ? "bg-gradient-to-br from-rose-100 to-pink-50 border-rose-200"
+              : task.estado ===
+                "En Progreso"
+              ? "bg-gradient-to-br from-amber-100 to-yellow-50 border-amber-200"
+              : "bg-gradient-to-br from-emerald-100 to-green-50 border-emerald-200"
+          }
+        `}
+      >
+
+        <div className="flex justify-between items-start mb-4">
+
+          <h3 className="font-bold text-slate-800 text-lg leading-tight">
+            {task.titulo}
+          </h3>
+
+          <span
+            className={`
+              text-xs px-3 py-1 rounded-full font-semibold shadow-sm
+              ${
+                task.estado ===
+                "Pendiente"
+                  ? "bg-rose-500 text-white"
+                  : task.estado ===
+                    "En Progreso"
+                  ? "bg-amber-500 text-white"
+                  : "bg-emerald-500 text-white"
+              }
+            `}
+          >
+            {task.estado}
+          </span>
+
+        </div>
+
+        <p className="text-slate-700 text-sm mb-5 leading-relaxed">
+          {task.descripcion}
+        </p>
+
+        <div className="flex justify-between items-center mb-5">
+
+          <p className="text-xs text-slate-500 font-medium">
+            📅 {task.fechaVencimiento}
+          </p>
+
+          <div className="w-10 h-10 rounded-2xl bg-white/60 backdrop-blur-lg flex items-center justify-center shadow-inner">
+            ✨
+          </div>
+
+        </div>
+
+        <div className="flex gap-3">
+
+          <button
+            onClick={() =>
+              setEditingTask(task)
+            }
+            className="flex-1 bg-white/80 hover:bg-white text-slate-700 py-2.5 rounded-2xl transition font-semibold shadow-sm"
+          >
+            Editar
+          </button>
+
+          <button
+            onClick={() =>
+              handleDelete(task.id)
+            }
+            className="flex-1 bg-slate-900 hover:bg-black text-white py-2.5 rounded-2xl transition font-semibold shadow-lg"
+          >
+            Eliminar
+          </button>
+
+        </div>
+
+      </div>
+    ))
+  )}
+
+</div>
 
                         <div className="flex justify-between items-start mb-4">
 
