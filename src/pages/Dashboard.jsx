@@ -27,7 +27,12 @@ export default function Dashboard() {
 
   const navigate = useNavigate();
 
-  const [tasks, setTasks] = useState([]);
+  // =========================
+  // STATES
+  // =========================
+
+  const [tasks, setTasks] =
+    useState([]);
 
   const [loading, setLoading] =
     useState(false);
@@ -37,6 +42,11 @@ export default function Dashboard() {
 
   const [filter, setFilter] =
     useState("TODAS");
+
+  const [
+    draggingColumn,
+    setDraggingColumn,
+  ] = useState(null);
 
   const [newTask, setNewTask] =
     useState({
@@ -85,7 +95,9 @@ export default function Dashboard() {
   // CREATE TASK
   // =========================
 
-  const handleCreateTask = async (e) => {
+  const handleCreateTask = async (
+    e
+  ) => {
 
     e.preventDefault();
 
@@ -96,7 +108,6 @@ export default function Dashboard() {
         title: "Campo requerido",
         text: "El título es obligatorio",
       });
-
     }
 
     try {
@@ -128,7 +139,6 @@ export default function Dashboard() {
         title: "Error",
         text: "No se pudo crear la tarea",
       });
-
     }
   };
 
@@ -145,7 +155,8 @@ export default function Dashboard() {
       showCancelButton: true,
       confirmButtonColor: "#ef4444",
       cancelButtonColor: "#64748b",
-      confirmButtonText: "Sí, eliminar",
+      confirmButtonText:
+        "Sí, eliminar",
     }).then(async (result) => {
 
       if (result.isConfirmed) {
@@ -156,7 +167,8 @@ export default function Dashboard() {
 
           Swal.fire({
             icon: "success",
-            title: "Tarea eliminada",
+            title:
+              "Tarea eliminada",
             timer: 1000,
             showConfirmButton: false,
           });
@@ -166,7 +178,6 @@ export default function Dashboard() {
         } catch (error) {
 
           console.error(error);
-
         }
       }
     });
@@ -176,34 +187,33 @@ export default function Dashboard() {
   // UPDATE TASK
   // =========================
 
-  const handleUpdateTask = async (
-    updatedTask
-  ) => {
+  const handleUpdateTask =
+    async (updatedTask) => {
 
-    try {
+      try {
 
-      await updateTask(
-        updatedTask.id,
-        updatedTask
-      );
+        await updateTask(
+          updatedTask.id,
+          updatedTask
+        );
 
-      Swal.fire({
-        icon: "success",
-        title: "Tarea actualizada",
-        timer: 1000,
-        showConfirmButton: false,
-      });
+        Swal.fire({
+          icon: "success",
+          title:
+            "Tarea actualizada",
+          timer: 1000,
+          showConfirmButton: false,
+        });
 
-      setEditingTask(null);
+        setEditingTask(null);
 
-      loadTasks();
+        loadTasks();
 
-    } catch (error) {
+      } catch (error) {
 
-      console.error(error);
-
-    }
-  };
+        console.error(error);
+      }
+    };
 
   // =========================
   // DRAG & DROP
@@ -228,7 +238,9 @@ export default function Dashboard() {
     e.preventDefault();
 
     const task = JSON.parse(
-      e.dataTransfer.getData("task")
+      e.dataTransfer.getData(
+        "task"
+      )
     );
 
     try {
@@ -243,7 +255,6 @@ export default function Dashboard() {
     } catch (error) {
 
       console.error(error);
-
     }
   };
 
@@ -260,7 +271,8 @@ export default function Dashboard() {
       ? tasks
       : tasks.filter(
           (task) =>
-            task.estado === filter
+            task.estado ===
+            filter
         );
 
   // =========================
@@ -338,7 +350,9 @@ export default function Dashboard() {
               <div className="flex flex-wrap gap-2 mt-3">
 
                 <span className="bg-indigo-100 text-indigo-700 text-xs px-3 py-1 rounded-full font-semibold">
-                  {user?.department}
+                  {
+                    user?.department
+                  }
                 </span>
 
                 <span className="bg-emerald-100 text-emerald-700 text-xs px-3 py-1 rounded-full font-semibold">
@@ -375,7 +389,9 @@ export default function Dashboard() {
             </div>
 
             <button
-              onClick={handleLogout}
+              onClick={
+                handleLogout
+              }
               className="bg-gradient-to-r from-rose-500 to-pink-500 hover:scale-105 transition-all text-white px-6 py-4 rounded-2xl shadow-xl font-semibold"
             >
               Cerrar sesión
@@ -416,7 +432,9 @@ export default function Dashboard() {
           </div>
 
           <form
-            onSubmit={handleCreateTask}
+            onSubmit={
+              handleCreateTask
+            }
             className="grid md:grid-cols-2 gap-5"
           >
 
@@ -451,7 +469,9 @@ export default function Dashboard() {
 
             <textarea
               placeholder="Descripción"
-              value={newTask.descripcion}
+              value={
+                newTask.descripcion
+              }
               onChange={(e) =>
                 setNewTask({
                   ...newTask,
@@ -467,96 +487,6 @@ export default function Dashboard() {
             </button>
 
           </form>
-
-        </div>
-
-        {/* STATS */}
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
-
-          <div className="bg-gradient-to-br from-indigo-500 to-indigo-700 rounded-3xl p-6 text-white shadow-xl hover:scale-[1.02] transition-all">
-
-            <div className="flex justify-between items-center">
-
-              <div>
-
-                <p className="text-white/70 text-sm mb-2">
-                  Total tareas
-                </p>
-
-                <h3 className="text-4xl font-black">
-                  {tasks.length}
-                </h3>
-
-              </div>
-
-              <div className="w-16 h-16 rounded-3xl bg-white/20 flex items-center justify-center text-3xl">
-                📋
-              </div>
-
-            </div>
-
-          </div>
-
-          <div className="bg-gradient-to-br from-amber-400 to-orange-500 rounded-3xl p-6 text-white shadow-xl hover:scale-[1.02] transition-all">
-
-            <div className="flex justify-between items-center">
-
-              <div>
-
-                <p className="text-white/70 text-sm mb-2">
-                  En progreso
-                </p>
-
-                <h3 className="text-4xl font-black">
-                  {
-                    tasks.filter(
-                      (task) =>
-                        task.estado ===
-                        "En Progreso"
-                    ).length
-                  }
-                </h3>
-
-              </div>
-
-              <div className="w-16 h-16 rounded-3xl bg-white/20 flex items-center justify-center text-3xl">
-                ⚡
-              </div>
-
-            </div>
-
-          </div>
-
-          <div className="bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-3xl p-6 text-white shadow-xl hover:scale-[1.02] transition-all">
-
-            <div className="flex justify-between items-center">
-
-              <div>
-
-                <p className="text-white/70 text-sm mb-2">
-                  Completadas
-                </p>
-
-                <h3 className="text-4xl font-black">
-                  {
-                    tasks.filter(
-                      (task) =>
-                        task.estado ===
-                        "Completada"
-                    ).length
-                  }
-                </h3>
-
-              </div>
-
-              <div className="w-16 h-16 rounded-3xl bg-white/20 flex items-center justify-center text-3xl">
-                ✅
-              </div>
-
-            </div>
-
-          </div>
 
         </div>
 
@@ -587,6 +517,60 @@ export default function Dashboard() {
           ))}
         </div>
 
+        {/* STATS */}
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
+
+          <div className="bg-gradient-to-br from-indigo-500 to-indigo-700 rounded-3xl p-6 text-white shadow-xl">
+
+            <p className="text-white/70 text-sm mb-2">
+              Total tareas
+            </p>
+
+            <h3 className="text-4xl font-black">
+              {tasks.length}
+            </h3>
+
+          </div>
+
+          <div className="bg-gradient-to-br from-amber-400 to-orange-500 rounded-3xl p-6 text-white shadow-xl">
+
+            <p className="text-white/70 text-sm mb-2">
+              En progreso
+            </p>
+
+            <h3 className="text-4xl font-black">
+              {
+                tasks.filter(
+                  (task) =>
+                    task.estado ===
+                    "En Progreso"
+                ).length
+              }
+            </h3>
+
+          </div>
+
+          <div className="bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-3xl p-6 text-white shadow-xl">
+
+            <p className="text-white/70 text-sm mb-2">
+              Completadas
+            </p>
+
+            <h3 className="text-4xl font-black">
+              {
+                tasks.filter(
+                  (task) =>
+                    task.estado ===
+                    "Completada"
+                ).length
+              }
+            </h3>
+
+          </div>
+
+        </div>
+
         {/* LOADER */}
 
         {loading ? (
@@ -602,15 +586,38 @@ export default function Dashboard() {
 
                 <div
                   key={estado}
-                  onDrop={(e) =>
+                  onDrop={(e) => {
                     handleDrop(
                       e,
                       estado
+                    );
+                    setDraggingColumn(
+                      null
+                    );
+                  }}
+                  onDragOver={(e) => {
+                    allowDrop(e);
+                    setDraggingColumn(
+                      estado
+                    );
+                  }}
+                  onDragLeave={() =>
+                    setDraggingColumn(
+                      null
                     )
                   }
-                  onDragOver={allowDrop}
-                  className="bg-white/50 backdrop-blur-xl border border-white/50 rounded-3xl p-5 shadow-xl min-h-[600px] hover:scale-[1.01] transition-all duration-300"
+                  className={`
+                    backdrop-blur-xl border rounded-3xl p-5 shadow-xl min-h-[600px] transition-all duration-300
+                    ${
+                      draggingColumn ===
+                      estado
+                        ? "bg-indigo-100/80 border-indigo-400 scale-[1.02]"
+                        : "bg-white/50 border-white/50"
+                    }
+                  `}
                 >
+
+                  {/* COLUMN HEADER */}
 
                   <div className="flex justify-between items-center mb-5">
 
@@ -620,17 +627,21 @@ export default function Dashboard() {
 
                     <span className="bg-white/80 text-slate-700 px-3 py-1 rounded-full text-sm font-semibold">
                       {
-                        columns[estado]
-                          .length
+                        columns[
+                          estado
+                        ].length
                       }
                     </span>
 
                   </div>
 
+                  {/* TASKS */}
+
                   <div className="space-y-4">
 
-                    {columns[estado]
-                      .length === 0 ? (
+                    {columns[
+                      estado
+                    ].length === 0 ? (
 
                       <div className="bg-white/40 border border-dashed border-white/60 rounded-3xl p-10 text-center">
 
@@ -650,113 +661,115 @@ export default function Dashboard() {
 
                     ) : (
 
-                      columns[estado].map(
-                        (task) => (
+                      columns[
+                        estado
+                      ].map((task) => (
 
-                          <div
-                            key={task.id}
-                            draggable
-                            onDragStart={(e) =>
-                              handleDragStart(
-                                e,
-                                task
-                              )
+                        <div
+                          key={task.id}
+                          draggable
+                          onDragStart={(
+                            e
+                          ) =>
+                            handleDragStart(
+                              e,
+                              task
+                            )
+                          }
+                          className={`
+                            rounded-3xl p-5 shadow-lg hover:shadow-2xl 
+                            hover:-translate-y-2 transition-all duration-300 
+                            cursor-grab border backdrop-blur-xl
+                            ${
+                              task.estado ===
+                              "Pendiente"
+                                ? "bg-gradient-to-br from-rose-100 to-pink-50 border-rose-200"
+                                : task.estado ===
+                                  "En Progreso"
+                                ? "bg-gradient-to-br from-amber-100 to-yellow-50 border-amber-200"
+                                : "bg-gradient-to-br from-emerald-100 to-green-50 border-emerald-200"
                             }
-                            className={`
-                              rounded-3xl p-5 shadow-lg hover:shadow-2xl 
-                              hover:-translate-y-2 transition-all duration-300 
-                              cursor-grab border backdrop-blur-xl
-                              ${
-                                task.estado ===
-                                "Pendiente"
-                                  ? "bg-gradient-to-br from-rose-100 to-pink-50 border-rose-200"
-                                  : task.estado ===
-                                    "En Progreso"
-                                  ? "bg-gradient-to-br from-amber-100 to-yellow-50 border-amber-200"
-                                  : "bg-gradient-to-br from-emerald-100 to-green-50 border-emerald-200"
-                              }
-                            `}
-                          >
+                          `}
+                        >
 
-                            <div className="flex justify-between items-start mb-4">
+                          <div className="flex justify-between items-start mb-4">
 
-                              <h3 className="font-bold text-slate-800 text-lg leading-tight">
-                                {
-                                  task.titulo
-                                }
-                              </h3>
-
-                              <span
-                                className={`
-                                  text-xs px-3 py-1 rounded-full font-semibold shadow-sm
-                                  ${
-                                    task.estado ===
-                                    "Pendiente"
-                                      ? "bg-rose-500 text-white"
-                                      : task.estado ===
-                                        "En Progreso"
-                                      ? "bg-amber-500 text-white"
-                                      : "bg-emerald-500 text-white"
-                                  }
-                                `}
-                              >
-                                {
-                                  task.estado
-                                }
-                              </span>
-
-                            </div>
-
-                            <p className="text-slate-700 text-sm mb-5 leading-relaxed">
+                            <h3 className="font-bold text-slate-800 text-lg leading-tight">
                               {
-                                task.descripcion
+                                task.titulo
+                              }
+                            </h3>
+
+                            <span
+                              className={`
+                                text-xs px-3 py-1 rounded-full font-semibold shadow-sm
+                                ${
+                                  task.estado ===
+                                  "Pendiente"
+                                    ? "bg-rose-500 text-white"
+                                    : task.estado ===
+                                      "En Progreso"
+                                    ? "bg-amber-500 text-white"
+                                    : "bg-emerald-500 text-white"
+                                }
+                              `}
+                            >
+                              {
+                                task.estado
+                              }
+                            </span>
+
+                          </div>
+
+                          <p className="text-slate-700 text-sm mb-5 leading-relaxed">
+                            {
+                              task.descripcion
+                            }
+                          </p>
+
+                          <div className="flex justify-between items-center mb-5">
+
+                            <p className="text-xs text-slate-500 font-medium">
+                              📅{" "}
+                              {
+                                task.fechaVencimiento
                               }
                             </p>
 
-                            <div className="flex justify-between items-center mb-5">
-
-                              <p className="text-xs text-slate-500 font-medium">
-                                📅{" "}
-                                {
-                                  task.fechaVencimiento
-                                }
-                              </p>
-
-                              <div className="w-10 h-10 rounded-2xl bg-white/60 backdrop-blur-lg flex items-center justify-center shadow-inner">
-                                ✨
-                              </div>
-
-                            </div>
-
-                            <div className="flex gap-3">
-
-                              <button
-                                onClick={() =>
-                                  setEditingTask(
-                                    task
-                                  )
-                                }
-                                className="flex-1 bg-white/80 hover:bg-white text-slate-700 py-2.5 rounded-2xl transition font-semibold shadow-sm"
-                              >
-                                Editar
-                              </button>
-
-                              <button
-                                onClick={() =>
-                                  handleDelete(
-                                    task.id
-                                  )
-                                }
-                                className="flex-1 bg-slate-900 hover:bg-black text-white py-2.5 rounded-2xl transition font-semibold shadow-lg"
-                              >
-                                Eliminar
-                              </button>
-
+                            <div className="w-10 h-10 rounded-2xl bg-white/60 backdrop-blur-lg flex items-center justify-center shadow-inner">
+                              ✨
                             </div>
 
                           </div>
-                        )
-                      )
+
+                          <div className="flex gap-3">
+
+                            <button
+                              onClick={() =>
+                                setEditingTask(
+                                  task
+                                )
+                              }
+                              className="flex-1 bg-white/80 hover:bg-white text-slate-700 py-2.5 rounded-2xl transition font-semibold shadow-sm"
+                            >
+                              Editar
+                            </button>
+
+                            <button
+                              onClick={() =>
+                                handleDelete(
+                                  task.id
+                                )
+                              }
+                              className="flex-1 bg-slate-900 hover:bg-black text-white py-2.5 rounded-2xl transition font-semibold shadow-lg"
+                            >
+                              Eliminar
+                            </button>
+
+                          </div>
+
+                        </div>
+                      ))
                     )}
 
                   </div>
@@ -777,9 +790,13 @@ export default function Dashboard() {
         <EditTaskModal
           task={editingTask}
           onClose={() =>
-            setEditingTask(null)
+            setEditingTask(
+              null
+            )
           }
-          onSave={handleUpdateTask}
+          onSave={
+            handleUpdateTask
+          }
         />
 
       )}
