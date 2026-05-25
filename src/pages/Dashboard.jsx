@@ -376,6 +376,90 @@ export default function Dashboard() {
           </form>
         </div>
 
+        {/* STATS */}
+
+<div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
+
+  <div className="bg-gradient-to-br from-indigo-500 to-indigo-700 rounded-3xl p-6 text-white shadow-xl hover:scale-[1.02] transition-all">
+
+    <div className="flex justify-between items-center">
+
+      <div>
+        <p className="text-white/70 text-sm mb-2">
+          Total tareas
+        </p>
+
+        <h3 className="text-4xl font-black">
+          {tasks.length}
+        </h3>
+      </div>
+
+      <div className="w-16 h-16 rounded-3xl bg-white/20 flex items-center justify-center text-3xl">
+        📋
+      </div>
+
+    </div>
+
+  </div>
+
+  <div className="bg-gradient-to-br from-amber-400 to-orange-500 rounded-3xl p-6 text-white shadow-xl hover:scale-[1.02] transition-all">
+
+    <div className="flex justify-between items-center">
+
+      <div>
+        <p className="text-white/70 text-sm mb-2">
+          En progreso
+        </p>
+
+        <h3 className="text-4xl font-black">
+          {
+            tasks.filter(
+              (task) =>
+                task.estado ===
+                "En Progreso"
+            ).length
+          }
+        </h3>
+      </div>
+
+      <div className="w-16 h-16 rounded-3xl bg-white/20 flex items-center justify-center text-3xl">
+        ⚡
+      </div>
+
+    </div>
+
+  </div>
+
+  <div className="bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-3xl p-6 text-white shadow-xl hover:scale-[1.02] transition-all">
+
+    <div className="flex justify-between items-center">
+
+      <div>
+        <p className="text-white/70 text-sm mb-2">
+          Completadas
+        </p>
+
+        <h3 className="text-4xl font-black">
+          {
+            tasks.filter(
+              (task) =>
+                task.estado ===
+                "Completada"
+            ).length
+          }
+        </h3>
+      </div>
+
+      <div className="w-16 h-16 rounded-3xl bg-white/20 flex items-center justify-center text-3xl">
+        ✅
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
         {/* FILTERS */}
 
         <div className="flex flex-wrap gap-3 mb-8">
