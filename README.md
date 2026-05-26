@@ -168,7 +168,7 @@ Con commits descriptivos siguiendo convenciones profesionales.
 
 ## 🌍 Aplicación en Producción
 
-https://TU-LINK-VERCEL.vercel.app
+https://.vercel.app
 
 ---
 
