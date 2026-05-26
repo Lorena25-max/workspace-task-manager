@@ -1,18 +1,174 @@
-# React + Vite
+# 🚀 Workspace - Gestor de Tareas y Productividad
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicación web SPA desarrollada con React + Vite para la gestión de tareas de equipos de trabajo.
 
-Currently, two official plugins are available:
+Este proyecto fue construido como prueba técnica enfocada en:
+- Arquitectura frontend moderna
+- CRUD completo
+- UX/UI profesional
+- Manejo de estado
+- Persistencia de sesión
+- Drag & Drop estilo Trello
+- Buenas prácticas con GitFlow
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+# ✨ Características
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+✅ Inicio de sesión con LocalStorage  
+✅ Protección de rutas privadas  
+✅ CRUD completo de tareas  
+✅ Consumo de API REST  
+✅ Drag & Drop entre columnas  
+✅ Modal premium de edición  
+✅ Confirmaciones con SweetAlert2  
+✅ Loader mientras carga la API  
+✅ Filtros por estado  
+✅ Responsive Design  
+✅ Glassmorphism UI  
+✅ Dashboard moderno tipo SaaS  
 
-Note: This will impact Vite dev & build performances.
+---
 
-## Expanding the ESLint configuration
+# 🛠️ Stack Tecnológico
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- React.js
+- Vite
+- React Router DOM
+- Tailwind CSS
+- SweetAlert2
+- Axios
+- MockAPI
+- LocalStorage
+- Git & GitHub
+- Vercel
+
+---
+
+# 🌐 API Mockeada
+
+API utilizada:
+
+https://6a14c5b191ff9a63de070727.mockapi.io/api/tasks
+
+---
+
+# 📸 Screenshots
+
+## 🔐 Login
+
+![Login](./public/screenshots/login.jpeg)
+
+---
+
+## 📋 Dashboard
+
+![Dashboard](./public/screenshots/dashboard.jpeg)
+
+---
+
+## 🚀 Drag & Drop
+
+![DragDrop](./public/screenshots/drag-drop.jpeg)
+
+---
+
+## ✏️ Modal de edición
+
+![Modal](./public/screenshots/edit-modal.jpeg)
+
+---
+
+## 📱 Responsive
+
+![Responsive](./public/screenshots/mobile.jpeg)
+
+---
+
+# ⚙️ Instalación Local
+
+## 1. Clonar repositorio
+
+```bash
+git clone TU_REPOSITORIO
+```
+
+---
+
+## 2. Entrar al proyecto
+
+```bash
+cd pruebatecnica-lorena
+```
+
+---
+
+## 3. Instalar dependencias
+
+```bash
+npm install
+```
+
+---
+
+## 4. Ejecutar servidor
+
+```bash
+npm run dev
+```
+
+---
+
+# 📂 Arquitectura del Proyecto
+
+```txt
+src/
+│
+├── components/
+│   ├── EditTaskModal.jsx
+│   ├── Loader.jsx
+
+│
+├── context/
+│   └── AuthContext.jsx
+│
+├── pages/
+│   ├── Login.jsx
+│   └── Dashboard.jsx
+│
+├── routes/
+│   └── PrivateRoute.jsx
+│
+├── services/
+│   └── taskService.js
+│
+├── App.jsx
+├── main.jsx
+```
+
+---
+
+# 🌳 GitFlow Implementado
+
+El proyecto fue desarrollado usando flujo GitFlow:
+
+- main
+- develop
+- feature/*
+- fix/*
+
+Con commits descriptivos siguiendo convenciones profesionales.
+
+---
+
+# 🚀 Deploy
+
+Aplicación desplegada en Vercel:
+
+TU_LINK_VERCEL_AQUI
+
+---
+
+# 👩‍💻 Autor
+
+Desarrollado por Lorena Ruiz Pérez

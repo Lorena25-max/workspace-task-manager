@@ -49,12 +49,14 @@ export default function Dashboard() {
   ] = useState(null);
 
   const [newTask, setNewTask] =
-    useState({
-      titulo: "",
-      descripcion: "",
-      fechaVencimiento: "",
-      estado: "Pendiente",
-    });
+  useState({
+    titulo: "",
+    descripcion: "",
+    fechaVencimiento: "",
+    estado: "Pendiente",
+    usuario: user?.username,
+    departamento: user?.department,
+  });
 
   // =========================
   // LOAD TASKS
@@ -68,7 +70,16 @@ export default function Dashboard() {
 
       const response = await getTasks();
 
-      setTasks(response.data);
+      const filteredUserTasks =
+  response.data.filter(
+    (task) =>
+      task.usuario ===
+        user?.username &&
+      task.departamento ===
+        user?.department
+  );
+
+setTasks(filteredUserTasks);
 
     } catch (error) {
 
@@ -453,19 +464,24 @@ export default function Dashboard() {
             />
 
             <input
-              type="date"
-              value={
-                newTask.fechaVencimiento
-              }
-              onChange={(e) =>
-                setNewTask({
-                  ...newTask,
-                  fechaVencimiento:
-                    e.target.value,
-                })
-              }
-              className="bg-white/80 border border-slate-200 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-200 outline-none p-4 rounded-2xl transition"
-            />
+  type="date"
+  min={
+    new Date()
+      .toISOString()
+      .split("T")[0]
+  }
+  value={
+    newTask.fechaVencimiento
+  }
+  onChange={(e) =>
+    setNewTask({
+      ...newTask,
+      fechaVencimiento:
+        e.target.value,
+    })
+  }
+  className="bg-white/80 border border-slate-200 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-200 outline-none p-4 rounded-2xl transition"
+/>
 
             <textarea
               placeholder="Descripción"
