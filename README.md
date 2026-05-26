@@ -27,6 +27,10 @@ Este proyecto fue construido como prueba técnica enfocada en:
 ✅ Responsive Design  
 ✅ Glassmorphism UI  
 ✅ Dashboard moderno tipo SaaS  
+✅ Validación de fechas vencidas  
+✅ Persistencia de sesión por usuario  
+✅ Gestión de tareas por departamento  
+✅ Feedback visual durante Drag & Drop  
 
 ---
 
@@ -90,7 +94,7 @@ https://6a14c5b191ff9a63de070727.mockapi.io/api/tasks
 ## 1. Clonar repositorio
 
 ```bash
-git clone TU_REPOSITORIO
+git clone https://github.com/Lorena25-max/workspace-task-manager
 ```
 
 ---
@@ -127,7 +131,6 @@ src/
 ├── components/
 │   ├── EditTaskModal.jsx
 │   ├── Loader.jsx
-
 │
 ├── context/
 │   └── AuthContext.jsx
@@ -163,11 +166,20 @@ Con commits descriptivos siguiendo convenciones profesionales.
 
 # 🚀 Deploy
 
-Aplicación desplegada en Vercel:
+## 🌍 Aplicación en Producción
 
-TU_LINK_VERCEL_AQUI
+https://TU-LINK-VERCEL.vercel.app
 
 ---
+
+# 🧠 Decisiones Técnicas
+
+- Se utilizó React + Vite para mejorar rendimiento y velocidad de desarrollo.
+- Tailwind CSS permitió construir una interfaz moderna y responsive.
+- Se implementó LocalStorage para simular persistencia de sesión.
+- MockAPI fue utilizado para simular una API RESTful real.
+- Se aplicó arquitectura basada en componentes reutilizables.
+- Drag & Drop fue diseñado para mejorar la experiencia de usuario tipo Trello.
 
 # 👩‍💻 Autor
 
