@@ -8,44 +8,57 @@ import {
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 
-import PrivateRoute from "./routes/PrivateRoute.jsx";
+import PrivateRoute from "./routes/PrivateRoute";
 
 import { AuthProvider } from "./context/AuthContext";
 
-function HomeRedirect() {
-  const user = localStorage.getItem("user");
+function App() {
 
-  return user ? (
-    <Navigate to="/tablero" />
-  ) : (
-    <Navigate to="/login" />
-  );
-}
-
-export default function App() {
   return (
+
     <AuthProvider>
+
       <BrowserRouter>
+
         <Routes>
 
-          {/* REDIRECCIÓN INICIAL */}
-          <Route path="/" element={<HomeRedirect />} />
+          {/* Redirect raíz */}
+
+          <Route
+            path="/"
+            element={
+              <Navigate
+                to="/login"
+              />
+            }
+          />
 
           {/* LOGIN */}
-          <Route path="/login" element={<Login />} />
+
+          <Route
+            path="/login"
+            element={<Login />}
+          />
 
           {/* DASHBOARD PRIVADO */}
+
           <Route
-            path="/tablero"
+            path="/dashboard"
             element={
               <PrivateRoute>
+
                 <Dashboard />
+
               </PrivateRoute>
             }
           />
 
         </Routes>
+
       </BrowserRouter>
+
     </AuthProvider>
   );
 }
+
+export default App;

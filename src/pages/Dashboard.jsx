@@ -54,8 +54,6 @@ export default function Dashboard() {
     descripcion: "",
     fechaVencimiento: "",
     estado: "Pendiente",
-    usuario: user?.username,
-    departamento: user?.department,
   });
 
   // =========================
@@ -72,11 +70,24 @@ export default function Dashboard() {
 
       const filteredUserTasks =
   response.data.filter(
-    (task) =>
-      task.usuario ===
-        user?.username &&
-      task.departamento ===
-        user?.department
+    (task) => {
+
+      return (
+        String(task.usuario)
+          .trim()
+          .toLowerCase() ===
+          String(user?.username)
+            .trim()
+            .toLowerCase() &&
+
+        String(task.departamento)
+          .trim()
+          .toLowerCase() ===
+          String(user?.department)
+            .trim()
+            .toLowerCase()
+      );
+    }
   );
 
 setTasks(filteredUserTasks);
@@ -123,7 +134,11 @@ setTasks(filteredUserTasks);
 
     try {
 
-      await createTask(newTask);
+      await createTask({
+  ...newTask,
+  usuario: user?.username,
+  departamento: user?.department,
+});
 
       Swal.fire({
         icon: "success",
