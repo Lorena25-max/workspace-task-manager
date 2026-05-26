@@ -1,31 +1,46 @@
 import {
   createContext,
   useState,
+  useEffect,
 } from "react";
 
 export const AuthContext =
   createContext();
 
-export const AuthProvider = ({
+export function AuthProvider({
   children,
-}) => {
+}) {
 
   const [user, setUser] =
-    useState(() => {
+    useState(null);
 
-      const storedUser =
-        localStorage.getItem(
-          "user"
-        );
+  // =========================
+  // LOAD USER
+  // =========================
 
-      return storedUser
-        ? JSON.parse(storedUser)
-        : null;
-    });
+  useEffect(() => {
 
+    const storedUser =
+      localStorage.getItem(
+        "user"
+      );
+
+    if (storedUser) {
+
+      setUser(
+        JSON.parse(storedUser)
+      );
+    }
+
+  }, []);
+
+  // =========================
   // LOGIN
+  // =========================
 
-  const login = (userData) => {
+  const login = (
+    userData
+  ) => {
 
     localStorage.setItem(
       "user",
@@ -35,7 +50,9 @@ export const AuthProvider = ({
     setUser(userData);
   };
 
+  // =========================
   // LOGOUT
+  // =========================
 
   const logout = () => {
 
@@ -55,7 +72,9 @@ export const AuthProvider = ({
         logout,
       }}
     >
+
       {children}
+
     </AuthContext.Provider>
   );
-};
+}

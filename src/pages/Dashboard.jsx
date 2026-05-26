@@ -337,7 +337,7 @@ setTasks(filteredUserTasks);
 
     logout();
 
-    navigate("/login");
+    window.location.href = "/login";
   };
 
   return (
