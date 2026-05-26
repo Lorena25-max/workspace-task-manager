@@ -168,7 +168,7 @@ Con commits descriptivos siguiendo convenciones profesionales.
 
 ## 🌍 Aplicación en Producción
 
-https://workspace-task-manager-lorena-ruiz-s-projects.vercel.app/login
+https://workspace-task-manager-6cxh3p33r-lorena-ruiz-s-projects.vercel.app/login
 
 ---
 
