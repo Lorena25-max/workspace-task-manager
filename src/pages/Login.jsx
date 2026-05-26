@@ -37,7 +37,7 @@ export default function Login() {
       showConfirmButton: false,
     });
 
-    navigate("/tablero");
+    navigate("/dashboard");
   };
 
   return (
